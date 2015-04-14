@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -20,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), AudioRecordTest.class));
+                startActivity(new Intent(MainActivity.this, AudioRecordTest.class));
             }
         });
     }

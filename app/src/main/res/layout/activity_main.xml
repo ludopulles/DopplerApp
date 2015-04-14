@@ -17,9 +17,18 @@
     </ImageView>
 
     <Button
+        android:id="@+id/button1"
         android:layout_below="@id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mooien knop, nie"></Button>
+        android:text="AudioRecordTest"
+        android:textStyle="bold"></Button>
+
+    <Button
+        android:layout_below="@id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Whopper"
+        android:textStyle="bold"></Button>
 
 </RelativeLayout>
