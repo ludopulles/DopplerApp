@@ -41,10 +41,6 @@ public class RealTimeFourier extends Activity {
      * Sample rate in Hz
      */
     private int sampleRate = 8000;
-    /**
-     * the frequency given
-     */
-    private double frequency = 0.0;
 
     private FastFourierTransformer transformer = new FastFourierTransformer(blockSize);
 
@@ -85,27 +81,22 @@ public class RealTimeFourier extends Activity {
     public void onStartStopButtonClicked() {
         if (started) {
             started = false;
-            startStopButton.setText("Start");
+            startStopButton.setText(getString(R.string.start));
             recordTask.cancel(true);
         } else {
             started = true;
-            startStopButton.setText("Stop");
+            startStopButton.setText(getString(R.string.stop));
             recordTask = new RecordAudio();
             recordTask.execute();
         }
     }
 
-    private void setStatusText(final String text) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                statusTextView.setText(text);
-            }
-        });
-    }
-
-
     private class RecordAudio extends AsyncTask<Void, Frequency, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            statusTextView.setText("");
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -113,10 +104,8 @@ public class RealTimeFourier extends Activity {
             AudioRecord audioRecord = new AudioRecord(audioSource, sampleRate, channelConfig, audioEncoding, bufferSize);
 
             short[] buffer = new short[blockSize];
-
             double[] x = new double[blockSize], y = new double[blockSize];
 
-            setStatusText("Hello");
             try {
                 audioRecord.startRecording();  //Start
             } catch (Throwable t) {
@@ -154,11 +143,14 @@ public class RealTimeFourier extends Activity {
         protected void onProgressUpdate(Frequency... frequencies) {
             // print the frequency
             Arrays.sort(frequencies);
-            String info = "Frequencies: ";
+            StringBuffer info = new StringBuffer("Frequencies: ");
             for (int i = 0; i < 10 && i < frequencies.length; i++) {
-                info += "\nf = " + frequencies[i].frequency + ", m = " + frequencies[i].magnitude;
+                info.append("\nf = ");
+                info.append(String.format("%.5f", frequencies[i].frequency));
+                info.append(", m = ");
+                info.append(String.format("%.5f", frequencies[i].magnitude));
             }
-            setStatusText(info);
+            statusTextView.setText(info);
         }
     }
 }

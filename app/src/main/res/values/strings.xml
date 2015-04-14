@@ -16,4 +16,6 @@
     <string name="start_recording">Start opnemen</string>
 
     <string name="sprite">Sprite!</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 </resources>
