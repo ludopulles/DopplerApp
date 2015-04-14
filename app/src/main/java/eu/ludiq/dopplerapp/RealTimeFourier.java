@@ -36,7 +36,7 @@ public class RealTimeFourier extends Activity {
     /**
      * deal with this many samples at a time
      */
-    private int blockSize = 4096;
+    private int blockSize = 256;
     /**
      * Sample rate in Hz
      */
