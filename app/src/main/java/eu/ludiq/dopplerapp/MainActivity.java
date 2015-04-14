@@ -33,7 +33,6 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -44,17 +43,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        switch(id) {
-            case R.id.action_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                break;
-            default:
-                Toast toast = Toast.makeText(this, "Sprite!", Toast.LENGTH_SHORT);
-                toast.show();
+        
+        if (id == R.id.action_realtime) {
+            startActivity(new Intent(this, RealTimeFourier.class));
+        } else if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else {
+            Toast.makeText(this, getString(R.string.sprite), Toast.LENGTH_SHORT).show();
         }
-
         return true;
-        //return super.onOptionsItemSelected(item);
     }
 }

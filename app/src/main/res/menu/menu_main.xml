@@ -2,14 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_realtime"
+        android:orderInCategory="1"
+        android:title="@string/activity_realtime"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="1"
-        android:title="@string/action_settings"
+        android:orderInCategory="2"
+        android:title="@string/activity_settings"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/action_disclaimer"
-        android:orderInCategory="2"
-        android:title="@string/action_disclaimer"
+        android:orderInCategory="3"
+        android:title="@string/activity_disclaimer"
         app:showAsAction="never" />
 </menu>

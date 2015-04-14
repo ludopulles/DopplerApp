@@ -19,16 +19,16 @@
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="#ff0e2c48"></ImageView>
+            android:src="#ff0e2c48" />
 
         <TextView
             android:id="@+id/logoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="LOGO"
+            android:text="@string/logo"
             android:textColor="#FFFFFF"
-            android:textSize="50dp"></TextView>
+            android:textSize="50dp" />
 
     </RelativeLayout>
 
@@ -37,13 +37,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/logoContainer"
-        android:text="@string/button_meting"></Button>
+        android:text="@string/button_measure" />
 
     <Button
         android:id="@+id/button_over"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_meting"
-        android:text="@string/button_over"></Button>
+        android:text="@string/button_about" />
 
 </RelativeLayout>
