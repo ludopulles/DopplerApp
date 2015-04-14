@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">DopplerApp</string>
 
+    <string name="button_meting">Meting</string>
+    <string name="button_over">Over deze app</string>
+
     <string name="action_settings">Settings</string>
+    <string name="action_disclaimer">Disclaimer</string>
+    <string name="activity_settings">SettingsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

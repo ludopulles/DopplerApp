@@ -8,27 +8,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_width="450px"
-        android:layout_height="450px"
-        android:src="@drawable/logo">
-    </ImageView>
+    <RelativeLayout
+        android:id="@+id/logoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="#ff0e2c48"></ImageView>
+
+        <TextView
+            android:id="@+id/logoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="LOGO"
+            android:textColor="#FFFFFF"
+            android:textSize="50dp"></TextView>
+
+    </RelativeLayout>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_below="@id/logo"
+        android:id="@+id/button_meting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AudioRecordTest"
-        android:textStyle="bold"></Button>
+        android:layout_below="@id/logoContainer"
+        android:text="@string/button_meting"></Button>
 
     <Button
-        android:layout_below="@id/button1"
+        android:id="@+id/button_over"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Whopper"
-        android:textStyle="bold"></Button>
+        android:layout_below="@id/button_meting"
+        android:text="@string/button_over"></Button>
 
 </RelativeLayout>
