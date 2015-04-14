@@ -6,13 +6,17 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import eu.ludiq.dopplerapp.fft.FastFourierTransformer;
+import eu.ludiq.dopplerapp.fft.Frequency;
 
 public class RealTimeFourier extends Activity {
 
@@ -32,7 +36,7 @@ public class RealTimeFourier extends Activity {
     /**
      * deal with this many samples at a time
      */
-    private int blockSize = 256;
+    private int blockSize = 4096;
     /**
      * Sample rate in Hz
      */
@@ -59,10 +63,10 @@ public class RealTimeFourier extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time_fourier);
 
-        statusTextView = (TextView) findViewById(R.id.statusTextView);
-        startStopButton = (Button) findViewById(R.id.startStopButton);
+        this.statusTextView = (TextView) findViewById(R.id.statusTextView);
+        this.startStopButton = (Button) findViewById(R.id.startStopButton);
 
-        startStopButton.setOnClickListener(new View.OnClickListener() {
+        this.startStopButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -78,8 +82,30 @@ public class RealTimeFourier extends Activity {
         return true;
     }
 
+    public void onStartStopButtonClicked() {
+        if (started) {
+            started = false;
+            startStopButton.setText("Start");
+            recordTask.cancel(true);
+        } else {
+            started = true;
+            startStopButton.setText("Stop");
+            recordTask = new RecordAudio();
+            recordTask.execute();
+        }
+    }
 
-    private class RecordAudio extends AsyncTask<Void, Double, Void> {
+    private void setStatusText(final String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                statusTextView.setText(text);
+            }
+        });
+    }
+
+
+    private class RecordAudio extends AsyncTask<Void, Frequency, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -89,9 +115,8 @@ public class RealTimeFourier extends Activity {
             short[] buffer = new short[blockSize];
 
             double[] x = new double[blockSize], y = new double[blockSize];
-            double[] magnitude = new double[blockSize];
 
-            statusTextView.setText("Hello");
+            setStatusText("Hello");
             try {
                 audioRecord.startRecording();  //Start
             } catch (Throwable t) {
@@ -107,50 +132,33 @@ public class RealTimeFourier extends Activity {
 
                 transformer.fft(x, y);
 
+                Frequency[] frequencies = new Frequency[blockSize];
                 for (int i = 0; i < blockSize; i++) {
-                    magnitude[i] = Math.hypot(x[i], y[i]);
+                    double mag = Math.hypot(x[i], y[i]);
+                    double f = sampleRate * mag / blockSize;
+                    frequencies[i] = new Frequency(f, mag);
                 }
 
-                // Get the largest magnitude peak
-                double peak = -1.0;
-                for (int i = 0; i < blockSize; i++) {
-                    if (peak < magnitude[i]) {
-                        peak = magnitude[i];
-                    }
-                }
-
-                // calculated the frequency
-                frequency = (sampleRate * peak) / blockSize;
-
-                // calls onProgressUpdate publishes the frequency
-                publishProgress(frequency);
-                try {
-                    audioRecord.stop();
-                } catch (IllegalStateException e) {
-                    Log.e("Stop failed", e.toString());
-                }
+                // calls onProgressUpdate
+                // publishes the frequency
+                publishProgress(frequencies);
+            }
+            try {
+                audioRecord.stop();
+            } catch (IllegalStateException e) {
+                Log.e("Stop failed", e.toString());
             }
             return null;
         }
 
-        protected void onProgressUpdate(Double... frequencies) {
-            //print the frequency
-            String info = Double.toString(frequencies[0]);
-            statusTextView.setText(info);
+        protected void onProgressUpdate(Frequency... frequencies) {
+            // print the frequency
+            Arrays.sort(frequencies);
+            String info = "Frequencies: ";
+            for (int i = 0; i < 10 && i < frequencies.length; i++) {
+                info += "\nf = " + frequencies[i].frequency + ", m = " + frequencies[i].magnitude;
+            }
+            setStatusText(info);
         }
     }
-
-    public void onStartStopButtonClicked() {
-        if (started) {
-            started = false;
-            startStopButton.setText("Start");
-            recordTask.cancel(true);
-        } else {
-            started = true;
-            startStopButton.setText("Stop");
-            recordTask = new RecordAudio();
-            recordTask.execute();
-        }
-    }
-
 }
