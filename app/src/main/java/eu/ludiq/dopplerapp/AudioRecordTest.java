@@ -41,6 +41,7 @@ public class AudioRecordTest extends Activity {
         }
     }
 
+
     private void startPlaying() {
         mPlayer = new MediaPlayer();
         try {
@@ -51,7 +52,6 @@ public class AudioRecordTest extends Activity {
             Log.e(LOG_TAG, "prepare() failed");
         }
     }
-
     private void stopPlaying() {
         mPlayer.release();
         mPlayer = null;
