@@ -143,12 +143,10 @@ public class RealTimeFourier extends Activity {
         protected void onProgressUpdate(Frequency... frequencies) {
             // print the frequency
             Arrays.sort(frequencies);
-            StringBuffer info = new StringBuffer("Frequencies: ");
+            StringBuilder info = new StringBuilder("Frequencies: ");
             for (int i = 0; i < 10 && i < frequencies.length; i++) {
-                info.append("\nf = ");
-                info.append(String.format("%.5f", frequencies[i].frequency));
-                info.append(", m = ");
-                info.append(String.format("%.5f", frequencies[i].magnitude));
+                info.append("\nf = ").append(String.format("%.5f", frequencies[i].frequency));
+                info.append(", m = ").append(String.format("%.5f", frequencies[i].magnitude));
             }
             statusTextView.setText(info);
         }

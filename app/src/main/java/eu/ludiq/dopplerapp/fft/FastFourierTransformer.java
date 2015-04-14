@@ -75,7 +75,7 @@ public class FastFourierTransformer {
 
         for (i = 0; i < m; i++) {
             n1 = n2;
-            n2 = n2 + n2;
+            n2 <<= 1;
             a = 0;
 
             for (j = 0; j < n1; j++) {
