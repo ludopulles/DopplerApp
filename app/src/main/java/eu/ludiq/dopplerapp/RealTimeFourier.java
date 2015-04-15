@@ -125,8 +125,16 @@ public class RealTimeFourier extends Activity {
                 }
                 lastResult = curTime;
 
-                for (int i = 0; i < BLOCK_SIZE && i < bufferReadResult; i++) {
+                /*for (int i = 0; i < BLOCK_SIZE && i < bufferReadResult; i++) {
                     x[i] = (double) buffer[i] / 32768.0;
+                    y[i] = 0.0;
+                }*/
+
+                int numPeriods = 2;
+
+                Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
+                for (int i = 0; i < BLOCK_SIZE; i++) {
+                    x[i] = Math.sin((2 * Math.PI * numPeriods) * (i / BLOCK_SIZE));
                     y[i] = 0.0;
                 }
 
