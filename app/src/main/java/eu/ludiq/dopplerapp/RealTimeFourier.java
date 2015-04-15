@@ -46,7 +46,7 @@ public class RealTimeFourier extends Activity {
     /**
      * The time between two fourier analysises in ms
      */
-    private static final int WAITING_TIME = 500;
+    private static final int WAITING_TIME = 100;
 
     private FastFourierTransformer transformer = new FastFourierTransformer(BLOCK_SIZE);
 
