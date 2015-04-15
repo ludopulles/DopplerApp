@@ -134,7 +134,7 @@ public class RealTimeFourier extends Activity {
 
                 Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
                 for (int i = 0; i < BLOCK_SIZE; i++) {
-                    x[i] = Math.sin((2 * Math.PI * numPeriods) * (i / BLOCK_SIZE));
+                    x[i] = (Math.sin((2 * Math.PI * numPeriods) * (i / BLOCK_SIZE)) + Math.sin((4 * Math.PI * numPeriods) * (i / BLOCK_SIZE))) / 2.0;
                     y[i] = 0.0;
                 }
 
