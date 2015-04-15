@@ -12,16 +12,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="25dp" />
 
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/statusTextView"
+        android:layout_gravity="center_horizontal" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/statusTextView"
-            android:layout_gravity="center_horizontal" />
-
-    </ScrollView>
+    <eu.ludiq.dopplerapp.graphics.FrequencyGraph
+        android:id="@+id/freq_graph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp" />
 
 </LinearLayout>

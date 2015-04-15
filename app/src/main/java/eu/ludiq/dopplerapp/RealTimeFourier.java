@@ -6,7 +6,6 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -17,32 +16,39 @@ import java.util.Arrays;
 
 import eu.ludiq.dopplerapp.fft.FastFourierTransformer;
 import eu.ludiq.dopplerapp.fft.Frequency;
+import eu.ludiq.dopplerapp.graphics.FrequencyGraph;
 
 public class RealTimeFourier extends Activity {
 
+    private static final String TAG = "RealTimeFourier";
     /**
      * Audio source is the device MIC
      */
-    private int audioSource = MediaRecorder.AudioSource.MIC;
+    private static final int AUDIO_SOURCE = MediaRecorder.AudioSource.MIC;
     /**
      * Recording in mono
      */
-    private int channelConfig = AudioFormat.CHANNEL_IN_MONO;
+    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     /**
      * Records in 16bit
      */
-    private int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
+    private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
     /**
      * deal with this many samples at a time
      */
-    private int blockSize = 256;
+    private static final int BLOCK_SIZE = 256;
     /**
      * Sample rate in Hz
      */
-    private int sampleRate = 8000;
+    private static final int SAMPLE_RATE = 8000;
 
-    private FastFourierTransformer transformer = new FastFourierTransformer(blockSize);
+    /**
+     * The time between two fourier analysises in ms
+     */
+    private static final int WAITING_TIME = 500;
+
+    private FastFourierTransformer transformer = new FastFourierTransformer(BLOCK_SIZE);
 
     /**
      * Creates a Record Audio command
@@ -51,8 +57,10 @@ public class RealTimeFourier extends Activity {
 
     private TextView statusTextView;
     private Button startStopButton;
+    private FrequencyGraph graph;
 
-    private volatile boolean started = false;
+    private boolean isRunning = false;
+    private long lastResult = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +69,7 @@ public class RealTimeFourier extends Activity {
 
         this.statusTextView = (TextView) findViewById(R.id.statusTextView);
         this.startStopButton = (Button) findViewById(R.id.startStopButton);
+        this.graph = (FrequencyGraph) findViewById(R.id.freq_graph);
 
         this.startStopButton.setOnClickListener(new View.OnClickListener() {
 
@@ -79,72 +88,74 @@ public class RealTimeFourier extends Activity {
     }
 
     public void onStartStopButtonClicked() {
-        if (started) {
-            started = false;
+        if (isRunning) {
             startStopButton.setText(getString(R.string.start));
             recordTask.cancel(true);
         } else {
-            started = true;
             startStopButton.setText(getString(R.string.stop));
             recordTask = new RecordAudio();
             recordTask.execute();
         }
+        isRunning = !isRunning;
     }
 
     private class RecordAudio extends AsyncTask<Void, Frequency, Void> {
 
         @Override
-        protected void onPreExecute() {
-            statusTextView.setText("");
-        }
-
-        @Override
         protected Void doInBackground(Void... params) {
-            int bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioEncoding);
-            AudioRecord audioRecord = new AudioRecord(audioSource, sampleRate, channelConfig, audioEncoding, bufferSize);
+            int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_ENCODING);
+            AudioRecord audioRecord = new AudioRecord(AUDIO_SOURCE, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_ENCODING, bufferSize);
 
-            short[] buffer = new short[blockSize];
-            double[] x = new double[blockSize], y = new double[blockSize];
+            short[] buffer = new short[BLOCK_SIZE];
+            double[] x = new double[BLOCK_SIZE], y = new double[BLOCK_SIZE];
+            Frequency[] frequencies = new Frequency[BLOCK_SIZE];
 
             try {
                 audioRecord.startRecording();  //Start
-            } catch (Throwable t) {
-                Log.e("AudioRecord", "Recording Failed");
+            } catch (Exception e) {
+                Log.e(TAG, "Recording Failed", e);
             }
 
-            while (started) {
-                int bufferReadResult = audioRecord.read(buffer, 0, blockSize);
-                for (int i = 0; i < blockSize && i < bufferReadResult; i++) {
+            while (!isCancelled()) {
+                int bufferReadResult = audioRecord.read(buffer, 0, BLOCK_SIZE);
+
+                long curTime = System.currentTimeMillis();
+                if (curTime < lastResult + WAITING_TIME) {
+                    continue;
+                }
+                lastResult = curTime;
+
+                for (int i = 0; i < BLOCK_SIZE && i < bufferReadResult; i++) {
                     x[i] = (double) buffer[i] / 32768.0;
                     y[i] = 0.0;
                 }
 
                 transformer.fft(x, y);
 
-                Frequency[] frequencies = new Frequency[blockSize];
-                for (int i = 0; i < blockSize; i++) {
+                for (int i = 0; i < BLOCK_SIZE; i++) {
                     double mag = Math.hypot(x[i], y[i]);
-                    double f = sampleRate * mag / blockSize;
+                    double f = SAMPLE_RATE * i / BLOCK_SIZE;
                     frequencies[i] = new Frequency(f, mag);
                 }
 
-                // calls onProgressUpdate
-                // publishes the frequency
                 publishProgress(frequencies);
             }
             try {
                 audioRecord.stop();
             } catch (IllegalStateException e) {
-                Log.e("Stop failed", e.toString());
+                Log.e(TAG, "Stop failed", e);
             }
             return null;
         }
 
         protected void onProgressUpdate(Frequency... frequencies) {
+            graph.setFrequencies(frequencies);
+            graph.invalidate();
+
             // print the frequency
             Arrays.sort(frequencies);
             StringBuilder info = new StringBuilder("Frequencies: ");
-            for (int i = 0; i < 10 && i < frequencies.length; i++) {
+            for (int i = 0; i < 4 && i < frequencies.length; i++) {
                 info.append("\nf = ").append(String.format("%.5f", frequencies[i].frequency));
                 info.append(", m = ").append(String.format("%.5f", frequencies[i].magnitude));
             }
