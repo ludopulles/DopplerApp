@@ -68,10 +68,10 @@ public class FrequencyGraph extends View {
         double diffMag = maxMag - minMag;
 
         for (Frequency f : frequencies) {
-            double drawx = (f.frequency - minFreq) * w / diffFreq;
-            double drawy = (f.magnitude - minMag) * h / diffMag;
+            double drawX = (f.frequency - minFreq) * w / diffFreq;
+            double drawY = h - (f.magnitude - minMag) * h / diffMag;
 
-            canvas.drawLine((float) drawx, h, (float) drawx, (float) drawy, line);
+            canvas.drawLine((float) drawX, h, (float) drawX, (float) drawY, line);
         }
     }
 }
