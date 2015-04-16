@@ -47,7 +47,6 @@ public class FrequencyGraph extends View {
 
         int w = getWidth(), h = getHeight();
 
-        canvas.drawLine(0, 0, 0, h, this.line);
         canvas.drawLine(0, h, w, h, this.line);
 
         if (frequencies == null || frequencies.length == 0) return;
@@ -71,6 +70,7 @@ public class FrequencyGraph extends View {
             double drawX = (f.frequency - minFreq) * w / diffFreq;
             double drawY = h - (f.magnitude - minMag) * h / diffMag;
 
+            line.setARGB(255, (int) ((f.magnitude - minMag) * 255 / diffMag), 80, 0);
             canvas.drawLine((float) drawX, h, (float) drawX, (float) drawY, line);
         }
     }

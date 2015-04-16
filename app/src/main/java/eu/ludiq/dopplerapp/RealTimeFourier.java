@@ -108,7 +108,7 @@ public class RealTimeFourier extends Activity {
 
             short[] buffer = new short[BLOCK_SIZE];
             double[] x = new double[BLOCK_SIZE], y = new double[BLOCK_SIZE];
-            Frequency[] frequencies = new Frequency[BLOCK_SIZE];
+            Frequency[] frequencies = new Frequency[BLOCK_SIZE / 2];
 
             try {
                 audioRecord.startRecording();  //Start
@@ -125,22 +125,22 @@ public class RealTimeFourier extends Activity {
                 }
                 lastResult = curTime;
 
-                /*for (int i = 0; i < BLOCK_SIZE && i < bufferReadResult; i++) {
+                for (int i = 0; i < BLOCK_SIZE && i < bufferReadResult; i++) {
                     x[i] = (double) buffer[i] / 32768.0;
-                    y[i] = 0.0;
-                }*/
-
-                int numPeriods = 2;
-
-                Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
-                for (int i = 0; i < BLOCK_SIZE; i++) {
-                    x[i] = (Math.sin((2 * Math.PI * numPeriods) * (i / BLOCK_SIZE)) + Math.sin((4 * Math.PI * numPeriods) * (i / BLOCK_SIZE))) / 2.0;
                     y[i] = 0.0;
                 }
 
+                /*Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
+                int numPeriods = 14
+                for (int i = 0; i < BLOCK_SIZE; i++) {
+                    x[i] = Math.sin((2 * Math.PI * numPeriods) * ((double) i / BLOCK_SIZE));
+                    Log.d("Amplitude " + i + ": ", String.valueOf(x[i]));
+                    y[i] = 0.0;
+                }*/
+
                 transformer.fft(x, y);
 
-                for (int i = 0; i < BLOCK_SIZE; i++) {
+                for (int i = 0; i < BLOCK_SIZE / 2; i++) {
                     double mag = Math.hypot(x[i], y[i]);
                     double f = SAMPLE_RATE * i / BLOCK_SIZE;
                     frequencies[i] = new Frequency(f, mag);
