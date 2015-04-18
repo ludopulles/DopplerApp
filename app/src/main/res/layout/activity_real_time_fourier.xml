@@ -1,27 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_small"
+    tools:context=".RealTimeFourier">
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/naderButton"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:text="@string/button_nader" />
+
+        <Button
+            android:id="@+id/vertrekButton"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:text="@string/button_vertrek" />
+
+    </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start"
-        android:id="@+id/startStopButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="25dp" />
+        android:id="@+id/startStopButton" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/statusTextView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_margin="@dimen/margin_small"/>
 
     <eu.ludiq.dopplerapp.graphics.FrequencyGraph
         android:id="@+id/freq_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp" />
+        android:layout_margin="@dimen/margin_small"/>
 
 </LinearLayout>

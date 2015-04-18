@@ -1,76 +1,26 @@
 package eu.ludiq.dopplerapp;
 
-import android.app.Activity;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
-import android.os.AsyncTask;
+import android.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import java.util.Arrays;
+public class RealTimeFourier extends ActionBarActivity {
 
-import eu.ludiq.dopplerapp.fft.FastFourierTransformer;
-import eu.ludiq.dopplerapp.fft.Frequency;
-import eu.ludiq.dopplerapp.graphics.FrequencyGraph;
-
-public class RealTimeFourier extends Activity {
-
-    private static final String TAG = "RealTimeFourier";
-    /**
-     * Audio source is the device MIC
-     */
-    private static final int AUDIO_SOURCE = MediaRecorder.AudioSource.MIC;
-    /**
-     * Recording in mono
-     */
-    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
-    /**
-     * Records in 16bit
-     */
-    private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-
-    /**
-     * deal with this many samples at a time
-     */
-    private static final int BLOCK_SIZE = 256;
-    /**
-     * Sample rate in Hz
-     */
-    private static final int SAMPLE_RATE = 8000;
-
-    /**
-     * The time between two fourier analysises in ms
-     */
-    private static final int WAITING_TIME = 100;
-
-    private FastFourierTransformer transformer = new FastFourierTransformer(BLOCK_SIZE);
-
-    /**
-     * Creates a Record Audio command
-     */
-    private RecordAudio recordTask;
-
-    private TextView statusTextView;
+    private FragmentManager fm;
     private Button startStopButton;
-    private FrequencyGraph graph;
-
-    private boolean isRunning = false;
-    private long lastResult = 0;
+    private boolean isRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time_fourier);
 
-        this.statusTextView = (TextView) findViewById(R.id.statusTextView);
-        this.startStopButton = (Button) findViewById(R.id.startStopButton);
-        this.graph = (FrequencyGraph) findViewById(R.id.freq_graph);
+        fm = getFragmentManager();
 
+        this.startStopButton = (Button) findViewById(R.id.startStopButton);
         this.startStopButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -78,6 +28,17 @@ public class RealTimeFourier extends Activity {
                 onStartStopButtonClicked();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // When activity is recreated (orientation change)
+        if(!isRunning && fm.findFragmentByTag("Joop") != null) {
+            isRunning = true;
+            startStopButton.setText(getString(R.string.stop));
+        }
     }
 
     @Override
@@ -90,16 +51,15 @@ public class RealTimeFourier extends Activity {
     public void onStartStopButtonClicked() {
         if (isRunning) {
             startStopButton.setText(getString(R.string.start));
-            recordTask.cancel(true);
+            fm.beginTransaction().remove(fm.findFragmentByTag("Joop")).commit();
         } else {
             startStopButton.setText(getString(R.string.stop));
-            recordTask = new RecordAudio();
-            recordTask.execute();
+            fm.beginTransaction().add(TaskFragment.getFragment(TaskFragment.RECORD_AUDIO), "Joop").commit();
         }
         isRunning = !isRunning;
     }
 
-    private class RecordAudio extends AsyncTask<Void, Frequency, Void> {
+    /*private class RecordAudio extends AsyncTask<Void, Frequency, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -130,13 +90,13 @@ public class RealTimeFourier extends Activity {
                     y[i] = 0.0;
                 }
 
-                /*Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
+                Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
                 int numPeriods = 14
                 for (int i = 0; i < BLOCK_SIZE; i++) {
                     x[i] = Math.sin((2 * Math.PI * numPeriods) * ((double) i / BLOCK_SIZE));
                     Log.d("Amplitude " + i + ": ", String.valueOf(x[i]));
                     y[i] = 0.0;
-                }*/
+                }
 
                 transformer.fft(x, y);
 
@@ -169,5 +129,5 @@ public class RealTimeFourier extends Activity {
             }
             statusTextView.setText(info);
         }
-    }
+    }*/
 }

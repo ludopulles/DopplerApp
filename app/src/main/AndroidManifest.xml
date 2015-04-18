@@ -19,16 +19,6 @@
         </activity>
 
         <activity
-            android:name=".AudioRecordTest"
-            android:label="AudioRecordTest"
-            android:parentActivityName=".MainActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.ludiq.dopplerapp.MainActivity" />
-        </activity>
-
-        <activity
             android:name=".SettingsActivity"
             android:label="@string/activity_settings"
             android:parentActivityName=".MainActivity">
@@ -40,7 +30,7 @@
 
         <activity
             android:name=".RealTimeFourier"
-            android:label="RealTimeFourier"
+            android:label="@string/activity_realtime"
             android:parentActivityName=".MainActivity">
 
             <meta-data

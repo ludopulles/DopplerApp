@@ -16,13 +16,12 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button metingButton = (Button) findViewById(R.id.button_meting);
-        Button overButton = (Button) findViewById(R.id.button_over);
+        Button metingButton = (Button) findViewById(R.id.buttonMeting);
+        Button overButton = (Button) findViewById(R.id.buttonOver);
         metingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //MetingActivity
-                startActivity(new Intent(MainActivity.this, AudioRecordTest.class));
+                startActivity(new Intent(MainActivity.this, RealTimeFourier.class));
             }
         });
         overButton.setOnClickListener(new View.OnClickListener() {
@@ -44,9 +43,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         
-        if (id == R.id.action_realtime) {
-            startActivity(new Intent(this, RealTimeFourier.class));
-        } else if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else {
             Toast.makeText(this, getString(R.string.sprite), Toast.LENGTH_SHORT).show();
