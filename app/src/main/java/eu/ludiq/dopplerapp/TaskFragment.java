@@ -179,5 +179,10 @@ public class TaskFragment extends Fragment {
             statusTextView.setText(info);
 
         }
+
+        @Override
+        public void onCancelled(Void result) {
+            PickerDialog.newInstance(null, 1).show(getFragmentManager(), "FreqDialog");
+        }
     }
 }
