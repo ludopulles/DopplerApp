@@ -3,14 +3,15 @@
 
     <string name="button_measure">Meting</string>
     <string name="button_about">Over deze app</string>
-    <string name="button_nader">Naderend</string>
-    <string name="button_vertrek">Vertrekkend</string>
+    <string name="button_approaching">Naderend</string>
+    <string name="button_leaving">Vertrekkend</string>
+    <string name="button_stop_measure">Stop de meting</string>
 
     <string name="activity_realtime">Meting</string>
     <string name="activity_settings">Instellingen</string>
     <string name="activity_disclaimer">Disclaimer</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hallo wereld!</string>
     <string name="logo">[ logo ]</string>
 
     <string name="sprite">Sprite!</string>

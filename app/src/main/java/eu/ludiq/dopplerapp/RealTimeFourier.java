@@ -9,6 +9,8 @@ import android.widget.Button;
 
 public class RealTimeFourier extends ActionBarActivity {
 
+    private static final String RECORD_FRAGMENT_NAME = "record_fragment";
+
     private FragmentManager fm;
     private Button startStopButton;
     private boolean isRunning;
@@ -40,7 +42,7 @@ public class RealTimeFourier extends ActionBarActivity {
         super.onResume();
 
         // When activity is recreated (orientation change)
-        if(!isRunning && fm.findFragmentByTag("Joop") != null) {
+        if (!isRunning && fm.findFragmentByTag(RECORD_FRAGMENT_NAME) != null) {
             isRunning = true;
             startStopButton.setText(getString(R.string.stop));
         }
@@ -62,10 +64,10 @@ public class RealTimeFourier extends ActionBarActivity {
     public void onStartStopButtonClicked() {
         if (isRunning) {
             startStopButton.setText(getString(R.string.start));
-            fm.beginTransaction().remove(fm.findFragmentByTag("Joop")).commit();
+            fm.beginTransaction().remove(fm.findFragmentByTag(RECORD_FRAGMENT_NAME)).commit();
         } else {
             startStopButton.setText(getString(R.string.stop));
-            fm.beginTransaction().add(TaskFragment.getFragment(TaskFragment.RECORD_AUDIO), "Joop").commit();
+            fm.beginTransaction().add(RecordFragment.getFragment(RecordFragment.RECORD_AUDIO), RECORD_FRAGMENT_NAME).commit();
         }
         isRunning = !isRunning;
     }

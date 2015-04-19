@@ -9,40 +9,36 @@
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="3">
 
         <Button
             android:id="@+id/naderButton"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:text="@string/button_nader" />
+            android:layout_weight="1"
+            android:text="@string/button_approaching" />
 
         <Button
             android:id="@+id/vertrekButton"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:text="@string/button_vertrek" />
+            android:layout_weight="1"
+            android:text="@string/button_leaving" />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/stopButton"
+            android:text="@string/button_stop_measure" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/start"
-        android:id="@+id/startStopButton" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/statusTextView"
-        android:layout_margin="@dimen/margin_small"/>
 
     <eu.ludiq.dopplerapp.graphics.FrequencyGraph
         android:id="@+id/freq_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_small"/>
+        android:layout_margin="@dimen/margin_small" />
 
 </LinearLayout>

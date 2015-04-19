@@ -8,19 +8,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.widget.TextView;
-
-import java.util.Arrays;
 
 import eu.ludiq.dopplerapp.fft.FastFourierTransformer;
-import eu.ludiq.dopplerapp.fft.Frequency;
 import eu.ludiq.dopplerapp.graphics.FrequencyGraph;
+import eu.ludiq.dopplerapp.model.Frequency;
 
-/**
- * Created by Loek on 18-4-2015.
- */
-public class TaskFragment extends Fragment {
+public class RecordFragment extends Fragment {
 
+    private static final String TAG = "RecordFragment";
     public static final int RECORD_AUDIO = 1;
 
     private int taskID;
@@ -32,8 +27,8 @@ public class TaskFragment extends Fragment {
         void onActivityUpdate();
     }
 
-    public static TaskFragment getFragment(int id) {
-        TaskFragment fragment = new TaskFragment();
+    public static RecordFragment getFragment(int id) {
+        RecordFragment fragment = new RecordFragment();
         fragment.taskID = id;
 
         return fragment;
@@ -42,7 +37,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        Log.d("LOEK: ", "onAttach");
+        Log.d(TAG, "onAttach");
 
         this.activity = activity;
         if(currentTask != null) {
@@ -63,7 +58,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.d("LOEK: ", "onDetach");
+        Log.d(TAG, "onDetach");
 
         this.activity = null;
     }
@@ -71,7 +66,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("LOEK: ", "onCreate");
+        Log.d(TAG, "onCreate");
 
         setRetainInstance(true);
         if(taskID == RECORD_AUDIO) {
@@ -83,7 +78,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("LOEK: ", "onDestroy");
+        Log.d(TAG, "onDestroy");
 
         currentTask.cancel(true);
     }
@@ -98,17 +93,11 @@ public class TaskFragment extends Fragment {
         private static final int WAITING_TIME = 100;
 
         private long lastResult = 0;
-        private TextView statusTextView;
         private FrequencyGraph graph;
         private FastFourierTransformer transformer = new FastFourierTransformer(BLOCK_SIZE);
 
         public void onActivityUpdate() {
-            Log.d("LOEK: ", "onActivityUpdate");
-
-            statusTextView = (TextView) activity.findViewById(R.id.statusTextView);
             graph = (FrequencyGraph) activity.findViewById(R.id.freq_graph);
-
-            Log.d("LOEK: ", graph.toString() + statusTextView.toString());
         }
 
         @Override
@@ -166,18 +155,10 @@ public class TaskFragment extends Fragment {
         }
 
         protected void onProgressUpdate(Frequency... frequencies) {
-            graph.setFrequencies(frequencies);
-            graph.invalidate();
-
-            // print the frequency
-            Arrays.sort(frequencies);
-            StringBuilder info = new StringBuilder("Frequencies: ");
-            for (int i = 0; i < 4 && i < frequencies.length; i++) {
-                info.append("\nf = ").append(String.format("%.5f", frequencies[i].frequency));
-                info.append(", m = ").append(String.format("%.5f", frequencies[i].magnitude));
+            if (graph != null) {
+                graph.setFrequencies(frequencies);
+                graph.invalidate();
             }
-            statusTextView.setText(info);
-
         }
     }
 }
