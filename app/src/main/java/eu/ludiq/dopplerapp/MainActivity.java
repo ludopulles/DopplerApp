@@ -44,8 +44,10 @@ public class MainActivity extends ActionBarActivity {
         
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
-        } else {
+        } else if(id == R.id.action_disclaimer) {
             startActivity(new Intent(this, DisclaimerActivity.class));
+        } else {
+            startActivity(new Intent(this, PickerActivity.class));
         }
         return true;
     }

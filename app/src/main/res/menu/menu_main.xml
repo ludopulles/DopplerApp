@@ -14,4 +14,10 @@
         android:orderInCategory="2"
         android:title="@string/activity_disclaimer"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_picker"
+        android:orderInCategory="3"
+        android:title="@string/activity_picker"
+        app:showAsAction="never" />
 </menu>
