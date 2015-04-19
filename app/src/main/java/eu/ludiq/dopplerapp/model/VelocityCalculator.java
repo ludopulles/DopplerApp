@@ -1,4 +1,4 @@
-package eu.ludiq.dopplerapp;
+package eu.ludiq.dopplerapp.model;
 
 public class VelocityCalculator {
   

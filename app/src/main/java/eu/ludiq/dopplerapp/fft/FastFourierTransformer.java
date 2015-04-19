@@ -36,7 +36,7 @@ public class FastFourierTransformer {
     }
 
     /**
-     * <p>O(NlogN) Cooley-Turkey FFT algorithm</p>
+     * <p>O(NlogN) Cooley-Tukey FFT algorithm</p>
      * <p>FFT: in-place radix-2 DIT DFT of a complex input</p>
      * <b>x and y, are both input and output</b>
      *
@@ -70,7 +70,7 @@ public class FastFourierTransformer {
         }
 
         // FFT
-        n1 = 0;
+//        n1 = 0;
         n2 = 1;
 
         for (i = 0; i < m; i++) {

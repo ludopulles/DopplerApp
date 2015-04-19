@@ -1,8 +1,5 @@
-package eu.ludiq.dopplerapp.fft;
+package eu.ludiq.dopplerapp.model;
 
-/**
- * Created by Ludo on 14-4-2015.
- */
 public class Frequency implements Comparable<Frequency> {
 
     public final double frequency, magnitude;

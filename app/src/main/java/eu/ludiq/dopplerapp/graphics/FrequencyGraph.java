@@ -6,12 +6,12 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import eu.ludiq.dopplerapp.fft.Frequency;
+import eu.ludiq.dopplerapp.model.Frequency;
 
 public class FrequencyGraph extends View {
 
     private Frequency[] frequencies;
-    private Paint line;
+    private Paint axes, line;
 
     public FrequencyGraph(Context context) {
         super(context);
@@ -29,8 +29,9 @@ public class FrequencyGraph extends View {
     }
 
     private void init(Context context) {
+        this.axes = new Paint();
+        this.axes.setColor(0xFF000000);
         this.line = new Paint();
-        this.line.setColor(0xFF000000);
     }
 
     public void setFrequencies(Frequency[] frequencies) {
@@ -47,19 +48,19 @@ public class FrequencyGraph extends View {
 
         int w = getWidth(), h = getHeight();
 
-        canvas.drawLine(0, h, w, h, this.line);
-
-        if (frequencies == null || frequencies.length == 0) return;
-        int n = frequencies.length;
+        if (frequencies == null || frequencies.length == 0) {
+            return;
+        }
 
         double minFreq = Integer.MAX_VALUE, maxFreq = Integer.MIN_VALUE;
-        double minMag = Integer.MAX_VALUE, maxMag = Integer.MIN_VALUE;
+//        double minMag = Integer.MAX_VALUE, maxMag = Integer.MIN_VALUE;
+        double minMag = 0, maxMag = 20;
 
         for (Frequency f : frequencies) {
             minFreq = Math.min(minFreq, f.frequency);
             maxFreq = Math.max(maxFreq, f.frequency);
 
-            minMag = Math.min(minMag, f.magnitude);
+//            minMag = Math.min(minMag, f.magnitude);
             maxMag = Math.max(maxMag, f.magnitude);
         }
 
@@ -73,5 +74,7 @@ public class FrequencyGraph extends View {
             line.setARGB(255, (int) ((f.magnitude - minMag) * 255 / diffMag), 80, 0);
             canvas.drawLine((float) drawX, h, (float) drawX, (float) drawY, line);
         }
+
+        canvas.drawLine(0, h, w, h, this.line);
     }
 }
