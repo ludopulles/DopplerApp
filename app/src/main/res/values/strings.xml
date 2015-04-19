@@ -6,8 +6,8 @@
     <string name="button_nader">Naderend</string>
     <string name="button_vertrek">Vertrekkend</string>
 
-    <string name="activity_realtime">Real-time Fourier</string>
-    <string name="activity_settings">Settings</string>
+    <string name="activity_realtime">Meting</string>
+    <string name="activity_settings">Instellingen</string>
     <string name="activity_disclaimer">Disclaimer</string>
 
     <string name="hello_world">Hello world!</string>
@@ -16,4 +16,24 @@
     <string name="sprite">Sprite!</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="pref_grootheden">Grootheden</string>
+    <string name="geluidssnelheid">Geluidssnelheid (m/s)</string>
+    <string name="activity_about">Over deze app</string>
+    <string name="aboutText">Een app waarmee de snelheid van een bepaald object kan worden bepaald. Dit wordt bereikt door een
+        frequentieanalyse uit te voeren op een door het object uitgezonden geluid (dit wordt met de
+        microfoon van de smartphone opgevangen). Vervolgens wordt met behulp van een formule m.b.t. het
+        Dopplereffect hieruit de snelheid bepaald.
+
+        \n\nBij de app is gebruik gemaakt van code van derden. De bronnen voor deze code zijn hieronder te
+        vinden:
+
+        \n- https://www.ee.columbia.edu/~ronw/code/dev/MEAPsoft/src/com/meapsoft/FFT.java
+        \n- http://stackoverflow.com/questions/16652999/displaying-a-double-frequency-that-is-updated-constantly-while-recording-with
+
+        \n\n\n\n\n<i>Ludo Pulles, Loek Steinebach, Tim de Groot, Menno Baak, 2015.</i>
+    </string>
+    <string name="disclaimer">De makers zijn niet aansprakelijk voor enig nadelig gevolg van het gebruik van deze applicatie. Dit
+        project is uitgevoerd in belang van het onderwijs en het wordt door de ontwikkelaars ten strengste
+        afgeraden om dit programma voor nauwkeurige metingen te gebruiken.
+    </string>
 </resources>
