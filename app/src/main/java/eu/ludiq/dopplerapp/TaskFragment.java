@@ -182,7 +182,7 @@ public class TaskFragment extends Fragment {
 
         @Override
         public void onCancelled(Void result) {
-            PickerDialog.newInstance(null, 1).show(getFragmentManager(), "FreqDialog");
+            PickerDialog.newInstance(new String[] {"henk"}, 1).show(getFragmentManager(), "FreqDialog");
         }
     }
 }
