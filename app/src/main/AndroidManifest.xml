@@ -37,6 +37,36 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="eu.ludiq.dopplerapp.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/activity_about"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eu.ludiq.dopplerapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".DisclaimerActivity"
+            android:label="@string/activity_disclaimer"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eu.ludiq.dopplerapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".PickerActivity"
+            android:label="@string/activity_picker"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eu.ludiq.dopplerapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

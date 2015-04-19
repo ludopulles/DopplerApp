@@ -135,17 +135,9 @@ public class RecordFragment extends Fragment {
                     y[i] = 0.0;
                 }
 
-                /*Log.d("Debug: ", "Frequency should be: " + numPeriods * SAMPLE_RATE / BLOCK_SIZE);
-                int numPeriods = 14
-                for (int i = 0; i < BLOCK_SIZE; i++) {
-                    x[i] = Math.sin((2 * Math.PI * numPeriods) * ((double) i / BLOCK_SIZE));
-                    Log.d("Amplitude " + i + ": ", String.valueOf(x[i]));
-                    y[i] = 0.0;
-                }*/
-
                 transformer.fft(x, y);
 
-                for (int i = 0; i < BLOCK_SIZE / 2; i++) {
+                for (int i = 0; i < frequencies.length; i++) {
                     double mag = Math.hypot(x[i], y[i]);
                     double f = (double) SAMPLE_RATE * i / BLOCK_SIZE;
                     frequencies[i] = new Frequency(f, mag);

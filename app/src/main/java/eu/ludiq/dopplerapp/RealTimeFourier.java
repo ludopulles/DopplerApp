@@ -22,7 +22,7 @@ public class RealTimeFourier extends ActionBarActivity {
 
         fm = getFragmentManager();
 
-        this.startStopButton = (Button) findViewById(R.id.naderButton);
+        this.startStopButton = (Button) findViewById(R.id.startStopButton);
         this.startStopButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -30,9 +30,16 @@ public class RealTimeFourier extends ActionBarActivity {
                 onStartStopButtonClicked();
             }
         });
+
+        if (savedInstanceState != null && savedInstanceState.containsKey("wasRunning") && savedInstanceState.getBoolean("wasRunning")) {
+            isRunning = true;
+            startStopButton.setText(getString(R.string.stop));
+        }
+
+        fm = getFragmentManager();
     }
 
-    @Override
+    /*@Override
     public void onResume() {
         super.onResume();
 
@@ -41,6 +48,12 @@ public class RealTimeFourier extends ActionBarActivity {
             isRunning = true;
             startStopButton.setText(getString(R.string.stop));
         }
+    }*/
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("wasRunning", isRunning);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

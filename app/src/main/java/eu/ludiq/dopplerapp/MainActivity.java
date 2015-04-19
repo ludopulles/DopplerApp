@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -27,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
         overButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //OverActivity
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
     }
@@ -46,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else {
-            Toast.makeText(this, getString(R.string.sprite), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, DisclaimerActivity.class));
         }
         return true;
     }
