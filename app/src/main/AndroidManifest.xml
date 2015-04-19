@@ -57,6 +57,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="eu.ludiq.dopplerapp.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".PickerActivity"
+            android:label="@string/activity_picker"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eu.ludiq.dopplerapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
