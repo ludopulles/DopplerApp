@@ -158,7 +158,7 @@ public class FrequencyGraph extends View {
         int w = getWidth(), h = getHeight();
 
         if (this.frequencies != null && this.frequencies.length > 0) {
-            Log.d(TAG, "drawing with " + minFreq + ", " + diffFreq + ", " + maxMag);
+//            Log.d(TAG, "drawing with " + minFreq + ", " + diffFreq + ", " + maxMag);
             for (int i = 0; i < this.frequencies.length; i++) {
                 Frequency f = this.frequencies[i];
                 double drawX = (f.frequency - minFreq) * w / diffFreq;

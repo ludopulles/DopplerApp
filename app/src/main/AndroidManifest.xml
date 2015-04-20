@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="eu.ludiq.dopplerapp" >
+    package="eu.ludiq.dopplerapp">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -9,61 +9,62 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/action_settings"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.ludiq.dopplerapp.MainActivity" />
-        </activity>
+            android:label="@string/action_settings" />
+
         <activity
             android:name=".RecordActivity"
             android:label="@string/activity_measure"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="eu.ludiq.dopplerapp.MainActivity" />
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:label="@string/activity_about"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="eu.ludiq.dopplerapp.MainActivity" />
         </activity>
+
         <activity
             android:name=".DisclaimerActivity"
-            android:label="@string/action_disclaimer"
-            android:parentActivityName=".MainActivity" >
+            android:label="@string/action_disclaimer">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="eu.ludiq.dopplerapp.MainActivity" />
         </activity>
+
         <activity
             android:name=".PickerActivity"
             android:label="@string/activity_picker"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".RecordActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.ludiq.dopplerapp.MainActivity" />
+                android:value="eu.ludiq.dopplerapp.RecordActivity" />
         </activity>
+
         <activity
             android:name=".SpeedActivity"
             android:label="@string/activity_speed"
-            android:parentActivityName=".PickerActivity" >
+            android:parentActivityName=".RecordActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.ludiq.dopplerapp.PickerActivity" />
+                android:value="eu.ludiq.dopplerapp.RecordActivity" />
         </activity>
     </application>
 

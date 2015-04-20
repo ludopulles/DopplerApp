@@ -29,6 +29,11 @@ public class SpeedActivity extends ActionBarActivity {
         this.tvSpeedOfSound = (TextView) findViewById(R.id.speed_of_sound);
         this.tvSpeedResultMS = (TextView) findViewById(R.id.speed_result_m_s);
         this.tvSpeedResultKMH = (TextView) findViewById(R.id.speed_result_km_h);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         // get the extras
         double frequencyApproaching = getIntent().getDoubleExtra(EXTRA_FREQUENCY_APPROACHING, -1.0);
