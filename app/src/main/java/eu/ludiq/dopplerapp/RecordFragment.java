@@ -2,7 +2,12 @@ package eu.ludiq.dopplerapp;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import eu.ludiq.dopplerapp.audio.AudioRecorder;

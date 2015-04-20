@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 
-
 public class SettingsActivity extends ActionBarActivity {
 
     @Override
