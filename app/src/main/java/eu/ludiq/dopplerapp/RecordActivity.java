@@ -18,8 +18,6 @@ public class RecordActivity extends ActionBarActivity {
     private static final String RECORD_FRAGMENT_NAME = "record_fragment";
     private static final int PICKER_REQUEST_CODE = 0;
 
-    private static final String KEY_WAS_RUNNING = "wasRunning";
-
     private static final int STATUS_INIT = 0;
     private static final int STATUS_APPROACHING = 1;
     private static final int STATUS_LEAVING = 2;
