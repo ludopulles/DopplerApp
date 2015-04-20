@@ -5,6 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/margin_small"
-    tools:context=".PickerActivity" >
+    tools:context=".PickerActivity">
+
+    <eu.ludiq.dopplerapp.graphics.FrequencyGraph
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/approaching_graph" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/approaching_seek_bar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <eu.ludiq.dopplerapp.graphics.FrequencyGraph
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/leaving_graph" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/leaving_seek_bar" />
 
 </LinearLayout>

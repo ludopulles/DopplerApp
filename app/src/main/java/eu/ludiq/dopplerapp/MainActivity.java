@@ -20,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
         metingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, RealTimeFourier.class));
+                startActivity(new Intent(MainActivity.this, RecordActivity.class));
             }
         });
         overButton.setOnClickListener(new View.OnClickListener() {
@@ -41,11 +41,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
-        } else {
+        } else if (id == R.id.action_disclaimer) {
             startActivity(new Intent(this, DisclaimerActivity.class));
+        } else {
+            return super.onOptionsItemSelected(item);
         }
         return true;
     }

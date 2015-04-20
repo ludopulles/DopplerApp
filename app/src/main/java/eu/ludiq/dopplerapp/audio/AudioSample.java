@@ -1,8 +1,9 @@
-package eu.ludiq.dopplerapp.model;
+package eu.ludiq.dopplerapp.audio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AudioSample {
+public class AudioSample implements Serializable {
 
     private ArrayList<Frequency[]> samples;
 

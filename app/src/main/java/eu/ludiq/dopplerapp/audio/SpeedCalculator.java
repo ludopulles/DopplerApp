@@ -1,10 +1,10 @@
-package eu.ludiq.dopplerapp.model;
+package eu.ludiq.dopplerapp.audio;
 
-public class VelocityCalculator {
+public class SpeedCalculator {
   
     private double speedOfSound;
     
-    public VelocityCalculator() {
+    public SpeedCalculator() {
         this.speedOfSound = 0.0;
     }
   

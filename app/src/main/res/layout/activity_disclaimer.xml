@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:scrollbars="vertical"
         android:maxLines="200"
-        android:text="@string/disclaimer"
+        android:text="@string/disclaimer_text"
         android:layout_height="match_parent" />
 
 </LinearLayout>

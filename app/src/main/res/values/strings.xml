@@ -1,41 +1,52 @@
 <resources>
     <string name="app_name">DopplerApp</string>
 
+    <string name="activity_measure">Meting</string>
+    <string name="activity_picker">Kies een frequentie</string>
+    <string name="activity_about">Over deze app</string>
+    <string name="activity_speed">SpeedActivity</string>
+
     <string name="button_measure">Meting</string>
     <string name="button_about">Over deze app</string>
-    <string name="button_approaching">Naderend</string>
-    <string name="button_leaving">Vertrekkend</string>
+
+    <string name="button_approaching">Naderend geluid opnemen</string>
+    <string name="button_leaving">Wegrijdend geluid opnemen</string>
     <string name="button_stop_measure">Stop de meting</string>
 
-    <string name="activity_realtime">Meting</string>
-    <string name="activity_settings">Instellingen</string>
-    <string name="activity_disclaimer">Disclaimer</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="action_disclaimer">Disclaimer</string>
 
-    <string name="hello_world">Hallo wereld!</string>
-    <string name="logo">[ logo ]</string>
+    <string name="action_calculate">Bereken!</string>
 
-    <string name="sprite">Sprite!</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
-    <string name="pref_grootheden">Grootheden</string>
-    <string name="geluidssnelheid">Geluidssnelheid (m/s)</string>
-    <string name="activity_about">Over deze app</string>
-    <string name="aboutText">Een app waarmee de snelheid van een bepaald object kan worden bepaald. Dit wordt bereikt door een
+
+    <string name="preference_units">Grootheden</string>
+    <string name="key_speed_of_sound">speedOfSound</string>
+    <string name="speed_of_sound">Geluidssnelheid (m/s)</string>
+
+
+    <string name="approaching_freq_text">Frequentie bij naderend geluid: %f</string>
+    <string name="leaving_freq_text">Frequentie bij wegrijdend geluid: %f</string>
+    <string name="speed_of_sound_text">Geluidssnelheid (m/s): %f</string>
+
+    <string name="result_m_s_text">Bepaalde snelheid (m/s): %f</string>
+    <string name="result_km_h_text">Bepaalde snelheid (km/h): %f</string>
+
+    <string name="about_text">Een app waarmee de snelheid van een bepaald object kan worden bepaald. Dit wordt bereikt door een
         frequentieanalyse uit te voeren op een door het object uitgezonden geluid (dit wordt met de
         microfoon van de smartphone opgevangen). Vervolgens wordt met behulp van een formule m.b.t. het
         Dopplereffect hieruit de snelheid bepaald.
 
-        \n\nBij de app is gebruik gemaakt van code van derden. De bronnen voor deze code zijn hieronder te
-        vinden:
+        \n\nBij de app is gebruik gemaakt van code van derden. De bronnen voor deze code zijn hieronder te vinden:
 
         \n- https://www.ee.columbia.edu/~ronw/code/dev/MEAPsoft/src/com/meapsoft/FFT.java
         \n- http://stackoverflow.com/questions/16652999/displaying-a-double-frequency-that-is-updated-constantly-while-recording-with
 
         \n\n\n\n\n<i>Ludo Pulles, Loek Steinebach, Tim de Groot, Menno Baak, 2015.</i>
     </string>
-    <string name="disclaimer">De makers zijn niet aansprakelijk voor enig nadelig gevolg van het gebruik van deze applicatie. Dit
+    <string name="disclaimer_text">De makers zijn niet aansprakelijk voor enig nadelig gevolg van het gebruik van deze applicatie. Dit
         project is uitgevoerd in belang van het onderwijs en het wordt door de ontwikkelaars ten strengste
         afgeraden om dit programma voor nauwkeurige metingen te gebruiken.
     </string>
-    <string name="activity_picker">Kies frequenties</string>
 </resources>
