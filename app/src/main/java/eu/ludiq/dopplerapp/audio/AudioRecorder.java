@@ -16,7 +16,7 @@ public class AudioRecorder extends AsyncTask<Void, Frequency, Void> {
     private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
-    private static final int BLOCK_SIZE = 256;
+    private static final int BLOCK_SIZE = 1024;
     private static final int SAMPLE_RATE = 8000;
 
     private static final int WAITING_TIME = 100;
@@ -27,7 +27,7 @@ public class AudioRecorder extends AsyncTask<Void, Frequency, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_ENCODING);
-        AudioRecord audioRecord = new AudioRecord(AUDIO_SOURCE, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_ENCODING, bufferSize);
+        AudioRecord audioRecord = new AudioRecord(AUDIO_SOURCE, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_ENCODING, 4 * bufferSize);
 
         short[] buffer = new short[BLOCK_SIZE];
         double[] x = new double[BLOCK_SIZE], y = new double[BLOCK_SIZE];

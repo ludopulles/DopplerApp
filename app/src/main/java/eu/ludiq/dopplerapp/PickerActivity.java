@@ -27,10 +27,11 @@ public class PickerActivity extends ActionBarActivity {
         super.onCreate(data);
         setContentView(R.layout.activity_picker);
 
-        Serializable sampleData = getIntent().getSerializableExtra(EXTRA_SAMPLE_DATA);
-        if (sampleData != null && sampleData instanceof AudioSample[]) {
-            AudioSample[] samples = (AudioSample[]) sampleData;
-
+        AudioSample[] samples = (AudioSample[]) getIntent().getSerializableExtra(EXTRA_SAMPLE_DATA);
+        if (samples != null) {
+//        Serializable sampleData = getIntent().getSerializableExtra(EXTRA_SAMPLE_DATA);
+//        if (sampleData != null && sampleData instanceof AudioSample[]) {
+//            AudioSample[] samples = (AudioSample[]) sampleData;
             if (samples.length == 2) {
                 this.pickers = new FrequencyPicker[]{
 

@@ -67,8 +67,9 @@ public class FrequencyGraph extends View {
     private void init(Context context) {
         this.axes = new Paint();
         this.axes.setColor(0xFF000000);
-        this.axes.setStrokeWidth(2f);
+        this.axes.setStrokeWidth(4f);
         this.line = new Paint();
+        this.line.setStrokeWidth(2f);
 
         this.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -126,7 +127,7 @@ public class FrequencyGraph extends View {
                 minFreq = Math.min(minFreq, f.frequency);
                 maxFreq = Math.max(maxFreq, f.frequency);
 
-                if (f.magnitude > maxMag) {
+                if (f.magnitude > maxMag && i > 0) {
                     maxMag = f.magnitude;
                     maxMagIndex = i;
                 }
